@@ -1,0 +1,273 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+a {
+    color: inherit;
+}
+button {
+    font: inherit;
+}
+:root{
+    --page-max: 560px;
+    --card-bg: #eef3ff;
+    --radius: 38px;
+    --btn-h: 74px;
+    --btn-h-wide: 82px;
+    --avatar: 54px;
+    --pad-x: 18px;
+    --gap: 14px;
+}
+body{
+    min-height: 100vh;
+    font-family: "Geologica", sans-serif;
+    background-color: #4c6edb;
+    background-image: url("../assets/images/bg.png");
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+.page{
+    width: min(var(--page-max), calc(100% - 24px));
+    margin: 0 auto;
+    padding: 18px 0 40px;
+}
+.topbar{
+    display: flex;
+    justify-content: space-between;
+}
+.pill-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 14px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 13px;
+}
+.pill-icon{
+    width: 18px;
+    height: 18px;
+}
+.circle-btn{
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.92);
+    border-radius: 999px;
+    border: 0;
+    cursor: pointer;
+}
+.circle-icon{
+    width: 18px;
+}
+.pill-btn,
+.circle-btn{
+    transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+}
+.pill-btn:hover,
+.circle-btn:hover{
+    transform: translateY(-1px);
+    filter: brightness(0.98);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.14);
+}
+.pill-btn:active,
+.circle-btn:active{
+    transform: translateY(0);
+    filter: brightness(0.96);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.10);
+}
+@media (hover: none){
+    .pill-btn:hover,
+    .circle-btn:hover{
+        transform: none;
+        filter: none;
+        box-shadow: none;
+    }
+}
+.share-icon{
+    line-height: 1;
+}
+.hero{
+    display: grid;
+    justify-items: center;
+    padding: 10px 0 18px;
+}
+.hero-img{
+    width: 100%;
+    max-width: 520px;
+}
+.hero-games-title{
+    max-width: 280px;
+}
+.content{
+    display: grid;
+    gap: 18px;
+}
+.link-btn{
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    text-decoration: none;
+    display: grid;
+    grid-template-columns: var(--avatar) 1fr var(--avatar);
+}
+.avatar-wrap{
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+.avatar-wrap img{
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    object-fit: cover;
+}
+.right-spacer{
+    width: var(--avatar);
+    height: var(--avatar);
+}
+.btn-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.btn-title{
+    font-weight: 900;
+    font-size: 15px;
+}
+.btn-subtitle{
+    font-weight: 700;
+    font-size: 13px;
+    opacity: 0.85;
+}
+.btn-list{
+    display: grid;
+    gap: 14px;
+}
+.instructions{
+    display: grid;
+    justify-items: center;
+    gap: 14px;
+    margin-top: 8px;
+}
+.instructions-title{
+    width: 100%;
+    max-width: 320px;
+}
+.accordion{
+    width: 100%;
+    background: var(--card-bg);
+    border-radius: 28px;
+    overflow: hidden;
+}
+.acc-header{
+    width: 100%;
+    height: 58px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+
+    display: grid;
+    grid-template-columns: 1fr 34px;
+    align-items: center;
+
+    padding: 0 18px;
+}
+.acc-text{
+    text-align: center;
+    font-weight: 900;
+    font-size: 16px;
+    text-shadow:
+    0  -0.6px 0 currentColor;
+}
+.acc-arrow{
+    width: 26px;
+    height: 26px;
+    justify-self: end;
+    position: relative;
+    transition: transform 220ms ease;
+}
+.acc-arrow::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 10px;
+    height: 10px;
+    border-right: 3px solid #1a1a1a;
+    border-bottom: 3px solid #1a1a1a;
+    transform: rotate(45deg);
+}
+.acc-panel{
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 260ms ease;
+}
+.acc-inner{
+    padding: 12px 14px 14px;
+}
+.acc-inner img{
+    width: 100%;
+    border-radius: 14px;
+}
+.accordion.is-open .acc-arrow{
+    transform: rotate(180deg);
+}
+.toast{
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.75);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease;
+}
+.toast.show{
+    opacity: 1;
+}
+.link-btn{
+    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+    will-change: transform;
+}
+.link-btn:hover{
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    filter: brightness(1.02);
+}
+.link-btn:active{
+    transform: translateY(0px) scale(0.99);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+@media (hover: none){
+    .link-btn:hover{
+        transform: none;
+        box-shadow: none;
+        filter: none;
+    }
+}
+@media (max-width: 420px){
+    :root{
+        --page-max: 420px;
+        --btn-h: 72px;
+        --btn-h-wide: 80px;
+        --avatar: 52px;
+        --pad-x: 14px;
+    }
+    .hero-games-title{ max-width: 250px; }
+}
