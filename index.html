@@ -1,155 +1,508 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Penkay Game</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&family=Onest:wght@100..900&display=swap"
-          rel="stylesheet"
-    />
-
-    <link rel="stylesheet" href="css/style.css"/>
-    <link rel="stylesheet" href="css/reset.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Penkay Games is a premium iGaming landing hub for crash, mines, plinko, live casino and instant-play games.">
+    <title>Penkay Games | Interactive iGaming Hub</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="page">
-    <div class="topbar">
-        <a class="pill-btn" href="https://t.me/Anton_Ayvazovskiy" target="_blank" rel="noopener">
-            <span class="pill-icon" aria-hidden="true">
-                <img src="assets/images/icons/bell.svg" alt="">
-            </span>
-            <span>Subscribe</span>
-        </a>
-        <button class="circle-btn" id="shareBtn" type="button" aria-label="Share">
-            <span class="circle-icon" aria-hidden="true">
-                <img src="assets/images/icons/share.svg" alt="">
-            </span>
-        </button>
-    </div>
-    <section class="hero">
-        <img
-                class="hero-img hero-promo"
-                src="assets/images/promo-title.png"
-                alt=""
-                onerror="this.style.display='none'"
-        />
-    </section>
-    <main class="content">
-        <a class="link-btn link-btn--wide" href="https://t.me/Anton_Ayvazovskiy" target="_blank" rel="noopener">
-      <span class="avatar-wrap">
-        <img src="assets/images/icons/telegram.png" alt="Telegram" onerror="this.style.display='none'">
-      </span>
+<canvas class="stage-canvas" id="stageCanvas" aria-hidden="true"></canvas>
 
-            <div class="btn-text">
-                <div class="btn-title">BONUSES AND VOUCHERS</div>
-                <div class="btn-subtitle">Telegram Channel</div>
+<div class="cursor-orbit" id="cursorOrbit" aria-hidden="true"></div>
+
+<div class="page" id="top">
+    <header class="site-header" aria-label="Main navigation">
+        <a class="brand" href="#top" aria-label="Penkay Games home">
+            <span class="brand-mark">PK</span>
+            <span class="brand-text">
+                <strong>Penkay</strong>
+                <span>Games</span>
+            </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Page sections">
+            <a class="casino-sound" href="#road" data-sound="coin">Road</a>
+            <a class="casino-sound" href="#games" data-sound="coin">Games</a>
+            <a class="casino-sound" href="#experience" data-sound="coin">Experience</a>
+            <a class="casino-sound" href="#guide" data-sound="coin">Guide</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false">
+                <span class="sound-dot" aria-hidden="true"></span>
+                Sound off
+            </button>
+            <a class="header-cta casino-sound" href="https://t.me/Anton_Ayvazovskiy" target="_blank" rel="noopener" data-sound="coin">
+                Bonuses
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" aria-labelledby="heroTitle">
+            <div class="hero-copy reveal">
+                <p class="eyebrow">Interactive iGaming lobby</p>
+                <h1 id="heroTitle">A cinematic game hub built for the next tap.</h1>
+                <p class="hero-lead">
+                    Premium 3D-style landing for crash, mines, plinko, live tables and instant casino games:
+                    fast decisions, strong visual hooks and audio feedback after user interaction.
+                </p>
+
+            <div class="hero-actions">
+                    <a class="primary-button casino-sound" href="#games" data-sound="win">
+                        <span class="button-glint" aria-hidden="true"></span>
+                        <span class="button-icon button-icon--target" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="8"></circle>
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
+                            </svg>
+                        </span>
+                        <span>Explore games</span>
+                    </a>
+                    <a class="ghost-button casino-sound" href="https://t.me/Anton_Ayvazovskiy" target="_blank" rel="noopener" data-sound="chip">
+                        <span class="button-glint" aria-hidden="true"></span>
+                        <span class="button-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 11h16v9H4z"></path>
+                                <path d="M3 7h18v4H3z"></path>
+                                <path d="M12 7v13"></path>
+                                <path d="M12 7c-3.2 0-5-1.1-5-2.6C7 3.5 7.7 3 8.7 3c1.7 0 2.8 1.5 3.3 4z"></path>
+                                <path d="M12 7c3.2 0 5-1.1 5-2.6 0-.9-.7-1.4-1.7-1.4-1.7 0-2.8 1.5-3.3 4z"></path>
+                            </svg>
+                        </span>
+                        <span>Telegram bonuses</span>
+                    </a>
+                </div>
+
+                <div class="metric-strip" aria-label="Platform highlights">
+                    <span>
+                        <strong>7</strong>
+                        <em>hot formats</em>
+                    </span>
+                    <span>
+                        <strong>3D</strong>
+                        <em>motion cards</em>
+                    </span>
+                    <span>
+                        <strong>18+</strong>
+                        <em>responsible play</em>
+                    </span>
+                </div>
             </div>
 
-            <span class="right-spacer" aria-hidden="true"></span>
-        </a>
-        <section class="btn-list">
-
-            <a class="link-btn" href="https://1wfaai.life/?open=register&p=2375" target="_blank" rel="noopener">
-        <span class="avatar-wrap">
-          <img src="assets/images/games/minedrop.png" alt="Minedrop" onerror="this.style.display='none'">
-        </span>
-                <div class="btn-text">
-                    <div class="btn-title">PLAY «MINEDROP» ⛏</div>
-                    <div class="btn-subtitle">Click to go to the game</div>
+            <div class="hero-orbital reveal" aria-hidden="true">
+                <div class="orbital-ring orbital-ring--one"></div>
+                <div class="orbital-ring orbital-ring--two"></div>
+                <div class="orbital-core">
+                    <span class="core-value">x18.72</span>
+                    <span class="core-label">cashout window</span>
                 </div>
-                <span class="right-spacer" aria-hidden="true"></span>
-            </a>
-
-            <a class="link-btn" href="https://1wfaai.life/casino?p=vtol" target="_blank" rel="noopener">
-        <span class="avatar-wrap">
-          <img src="assets/images/games/ice-fishing.png" alt="Ice Fishing" onerror="this.style.display='none'">
-        </span>
-                <div class="btn-text">
-                    <div class="btn-title">PLAY «ICE FISHING» 🎣</div>
-                    <div class="btn-subtitle">Click to go to the game</div>
-                </div>
-                <span class="right-spacer" aria-hidden="true"></span>
-            </a>
-
-            <a class="link-btn" href="https://1warjt.life/casino?p=sjr7" target="_blank" rel="noopener">
-        <span class="avatar-wrap">
-          <img src="assets/images/games/avia-masters.png" alt="Avia Masters" onerror="this.style.display='none'">
-        </span>
-                <div class="btn-text">
-                    <div class="btn-title">PLAY «AVIA MASTERS» ✈️</div>
-                    <div class="btn-subtitle">Click to go to the game</div>
-                </div>
-                <span class="right-spacer" aria-hidden="true"></span>
-            </a>
-
-            <a class="link-btn" href="https://1warjt.life/v3/5768/tower-rush?p=ro1c" target="_blank" rel="noopener">
-        <span class="avatar-wrap">
-          <img src="assets/images/games/tower-rush.png" alt="Tower Rush" onerror="this.style.display='none'">
-        </span>
-                <div class="btn-text">
-                    <div class="btn-title">PLAY «TOWER RUSH» 🏰</div>
-                    <div class="btn-subtitle">Click to go to the game</div>
-                </div>
-                <span class="right-spacer" aria-hidden="true"></span>
-            </a>
-
-            <a class="link-btn" href="https://1warjt.life/casino?p=vjqd" target="_blank" rel="noopener">
-        <span class="avatar-wrap">
-          <img src="assets/images/games/play-me.png" alt="Play Me" onerror="this.style.display='none'">
-        </span>
-                <div class="btn-text">
-                    <div class="btn-title">PLAY «PLAY ME» 🎰</div>
-                    <div class="btn-subtitle">Click to go to the game</div>
-                </div>
-                <span class="right-spacer" aria-hidden="true"></span>
-            </a>
-
-            <a class="link-btn" href="https://1wfaai.life/v3/6310/ninja-crash-regform?p=e9ro" target="_blank"
-               rel="noopener">
-        <span class="avatar-wrap">
-          <img src="assets/images/games/ninja-crash.png" alt="Ninja Crash" onerror="this.style.display='none'">
-        </span>
-                <div class="btn-text">
-                    <div class="btn-title">PLAY «NINJA CRASH» 🥷</div>
-                    <div class="btn-subtitle">Click to go to the game</div>
-                </div>
-                <span class="right-spacer" aria-hidden="true"></span>
-            </a>
-
+                <div class="floating-chip floating-chip--one">Crash</div>
+                <div class="floating-chip floating-chip--two">Mines</div>
+                <div class="floating-chip floating-chip--three">Live</div>
+                <div class="floating-card floating-card--one"></div>
+                <div class="floating-card floating-card--two"></div>
+            </div>
         </section>
-        <section class="instructions">
-            <img
-                    class="instructions-title"
-                    src="assets/images/instructions-title.png"
-                    alt=""
-                    onerror="this.style.display='none'"
-            />
-            <div class="accordion">
-                <button class="acc-header" type="button" aria-expanded="false">
-                    <span class="acc-text">⁉️ HOW TO REGISTRATE ⁉️</span>
-                    <span class="acc-arrow" aria-hidden="true"></span>
-                </button>
-                <div class="acc-panel">
-                    <div class="acc-inner">
-                        <img src="assets/images/register.png" alt="" onerror="this.style.display='none'">
+
+        <section class="ticker" aria-label="Popular game formats">
+            <div class="ticker-track">
+                <span>Crash games</span>
+                <span>Aviator-style multipliers</span>
+                <span>Mines</span>
+                <span>Plinko</span>
+                <span>Live dealer</span>
+                <span>Megaways slots</span>
+                <span>Instant arcade</span>
+                <span>Game shows</span>
+                <span>Chicken road runners</span>
+                <span>Crash games</span>
+                <span>Aviator-style multipliers</span>
+                <span>Mines</span>
+                <span>Plinko</span>
+            </div>
+        </section>
+
+        <section class="road-story" id="road" aria-labelledby="roadTitle">
+            <div class="road-sticky">
+                <div class="road-copy reveal">
+                    <p class="eyebrow">Scroll to run</p>
+                    <h2 id="roadTitle">A casino road trip from coin rush to the best games.</h2>
+                    <p>
+                        The chicken runner collects glowing coins, crosses the neon road and unlocks the lobby:
+                        Chicken Road-style arcade, Crash, Mines, Plinko, Live Dealer and Mega Reels.
+                    </p>
+                    <div class="road-progress" aria-hidden="true">
+                        <span></span>
+                    </div>
+                </div>
+
+                <div class="road-scene" aria-hidden="true">
+                    <div class="road-burst road-burst--left"></div>
+                    <div class="road-burst road-burst--right"></div>
+                    <div class="multiplier-plates">
+                        <span>x10</span>
+                        <span>x25</span>
+                        <span>x50</span>
+                    </div>
+                    <div class="skyline">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="road-sign road-sign--one">Crash</div>
+                    <div class="road-sign road-sign--two">Mines</div>
+                    <div class="road-sign road-sign--three">Plinko</div>
+                    <div class="road-sign road-sign--four">Live</div>
+                    <div class="coin-field" id="coinField"></div>
+                    <div class="neon-road">
+                        <span class="road-lane"></span>
+                        <span class="road-lane"></span>
+                        <span class="road-lane"></span>
+                    </div>
+                    <div class="chicken-runner" id="chickenRunner">
+                        <svg viewBox="0 0 220 190" role="img" aria-label="Running casino chicken">
+                            <defs>
+                                <linearGradient id="chickenBody" x1="0" x2="1" y1="0" y2="1">
+                                    <stop offset="0%" stop-color="#fff7d0"></stop>
+                                    <stop offset="48%" stop-color="#ffdf75"></stop>
+                                    <stop offset="100%" stop-color="#ff9f3d"></stop>
+                                </linearGradient>
+                                <linearGradient id="chickenWing" x1="0" x2="1">
+                                    <stop offset="0%" stop-color="#ffb84d"></stop>
+                                    <stop offset="100%" stop-color="#ff5c35"></stop>
+                                </linearGradient>
+                            </defs>
+                            <g class="chicken-shadow">
+                                <ellipse cx="104" cy="166" rx="74" ry="16"></ellipse>
+                            </g>
+                            <g class="chicken-body">
+                                <ellipse cx="94" cy="94" rx="68" ry="52" fill="url(#chickenBody)"></ellipse>
+                                <path class="chicken-wing" d="M62 100c25 5 46 22 56 48-31-2-55-17-68-39z" fill="url(#chickenWing)"></path>
+                                <path class="chicken-tail" d="M34 80 8 58l34 3L20 31l41 21z"></path>
+                            </g>
+                            <g class="chicken-head">
+                                <circle cx="145" cy="61" r="34" fill="#fff0b5"></circle>
+                                <path class="comb" d="M123 36c-2-17 14-25 19-8 7-19 25-13 19 4 16-8 26 8 11 18z"></path>
+                                <circle cx="155" cy="58" r="5" fill="#111824"></circle>
+                                <circle cx="157" cy="56" r="1.8" fill="#fff"></circle>
+                                <path class="beak" d="M176 66 212 78l-37 10z"></path>
+                                <path class="wattle" d="M150 88c12 8 10 25-4 25-11 0-14-12-5-24z"></path>
+                            </g>
+                            <g class="chicken-legs">
+                                <path class="leg leg--front" d="M83 137v28l-24 9"></path>
+                                <path class="leg leg--back" d="M116 136v26l24 12"></path>
+                            </g>
+                            <g class="coin-bag">
+                                <path d="M128 112c21 2 37 14 41 34-22 9-47 8-70-3 3-18 12-28 29-31z"></path>
+                                <path d="M120 112c8-8 24-8 32 0"></path>
+                                <text x="131" y="145">PK</text>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="finish-gate">
+                        <span>Lobby unlocked</span>
                     </div>
                 </div>
             </div>
-            <div class="accordion">
-                <button class="acc-header" type="button" aria-expanded="false">
-                    <span class="acc-text">⁉️ HOW TO FIND A GAME? ⁉️</span>
-                    <span class="acc-arrow" aria-hidden="true"></span>
-                </button>
-                <div class="acc-panel">
-                    <div class="acc-inner">
-                        <img src="assets/images/find-game.png" alt="" onerror="this.style.display='none'">
-                    </div>
+        </section>
+
+        <section class="games-section" id="games" aria-labelledby="gamesTitle">
+            <div class="section-heading reveal">
+                <p class="eyebrow">Trending games</p>
+                <h2 id="gamesTitle">Original animated cards for the formats players chase now.</h2>
+                <p>
+                    Built around current iGaming demand: crash mechanics, Mines, Plinko, live dealer/game-show energy,
+                    evolving slots and quick mobile arcade sessions.
+                </p>
+            </div>
+
+            <div class="games-grid">
+                <a class="game-card game-card--wide game-card--crash reveal casino-sound" href="https://1wfaai.life/v3/6310/ninja-crash-regform?p=e9ro" target="_blank" rel="noopener" data-sound="rocket" data-tilt>
+                    <span class="card-glow"></span>
+                    <span class="game-top">
+                        <span class="game-icon game-icon--crash" aria-hidden="true">
+                            <svg viewBox="0 0 64 64">
+                                <path class="svg-flame" d="M17 45c3-9 10-15 22-20l8-13 5 5-13 8c-5 12-11 19-20 22z"></path>
+                                <path class="svg-body" d="M25 39 13 51l-1-9 8-8zM37 27l8-8 8-1-12 12z"></path>
+                                <circle class="svg-window" cx="38" cy="26" r="4"></circle>
+                                <path class="svg-trail" d="M20 44c-5 0-9 2-13 7 6-1 10-1 14 2"></path>
+                            </svg>
+                        </span>
+                        <span class="game-meta">
+                            <em>#1 trend</em>
+                            <strong>Crash Orbit</strong>
+                        </span>
+                        <span class="odds-pill">x250</span>
+                    </span>
+                    <span class="game-visual crash-visual" aria-hidden="true">
+                        <span class="crash-grid"></span>
+                        <span class="flight-path"></span>
+                        <span class="rocket"></span>
+                        <span class="multiplier">x7.84</span>
+                        <span class="multiplier multiplier--late">x22.10</span>
+                        <span class="cashout-meter"><i></i></span>
+                    </span>
+                    <span class="card-stats">
+                        <span>Instant round</span>
+                        <span>High tension</span>
+                        <span>Streamer hook</span>
+                    </span>
+                    <span class="game-copy">Fast multiplier tension with a strong streamer-style hook.</span>
+                    <span class="play-button">
+                        <span class="button-glint" aria-hidden="true"></span>
+                        <span>Play crash</span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+
+                <a class="game-card game-card--mines reveal casino-sound" href="https://1wfaai.life/?open=register&p=2375" target="_blank" rel="noopener" data-sound="chip" data-tilt>
+                    <span class="card-glow"></span>
+                    <span class="game-top">
+                        <span class="game-icon game-icon--mines" aria-hidden="true">
+                            <svg viewBox="0 0 64 64">
+                                <rect class="svg-tile" x="10" y="10" width="13" height="13"></rect>
+                                <rect class="svg-tile" x="26" y="10" width="13" height="13"></rect>
+                                <rect class="svg-tile" x="42" y="10" width="13" height="13"></rect>
+                                <rect class="svg-tile" x="10" y="26" width="13" height="13"></rect>
+                                <path class="svg-gem" d="M32 25 43 36 32 50 21 36z"></path>
+                                <rect class="svg-tile" x="42" y="26" width="13" height="13"></rect>
+                                <rect class="svg-tile" x="10" y="42" width="13" height="13"></rect>
+                                <rect class="svg-tile" x="26" y="42" width="13" height="13"></rect>
+                                <rect class="svg-tile" x="42" y="42" width="13" height="13"></rect>
+                            </svg>
+                        </span>
+                        <span class="game-meta">
+                            <em>Risk reveal</em>
+                            <strong>Mines Vault</strong>
+                        </span>
+                        <span class="odds-pill">9x9</span>
+                    </span>
+                    <span class="game-visual mines-visual" aria-hidden="true">
+                        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                    </span>
+                    <span class="card-stats">
+                        <span>Pick tiles</span>
+                        <span>Reveal risk</span>
+                    </span>
+                    <span class="game-copy">Short rounds, visible danger and simple mobile decisions.</span>
+                    <span class="play-button">
+                        <span class="button-glint" aria-hidden="true"></span>
+                        <span>Open mines</span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+
+                <a class="game-card game-card--plinko reveal casino-sound" href="https://1warjt.life/casino?p=vjqd" target="_blank" rel="noopener" data-sound="drop" data-tilt>
+                    <span class="card-glow"></span>
+                    <span class="game-top">
+                        <span class="game-icon game-icon--plinko" aria-hidden="true">
+                            <svg viewBox="0 0 64 64">
+                                <circle class="svg-ball" cx="32" cy="10" r="6"></circle>
+                                <circle class="svg-peg" cx="22" cy="24" r="3"></circle>
+                                <circle class="svg-peg" cx="42" cy="24" r="3"></circle>
+                                <circle class="svg-peg" cx="16" cy="38" r="3"></circle>
+                                <circle class="svg-peg" cx="32" cy="38" r="3"></circle>
+                                <circle class="svg-peg" cx="48" cy="38" r="3"></circle>
+                                <path class="svg-bucket" d="M10 54h44l-5-10H15z"></path>
+                            </svg>
+                        </span>
+                        <span class="game-meta">
+                            <em>Instant drop</em>
+                            <strong>Neon Plinko</strong>
+                        </span>
+                        <span class="odds-pill">Drop</span>
+                    </span>
+                    <span class="game-visual plinko-visual" aria-hidden="true">
+                        <span class="plinko-ball"></span>
+                        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                    </span>
+                    <span class="card-stats">
+                        <span>Gravity</span>
+                        <span>Risk lanes</span>
+                    </span>
+                    <span class="game-copy">Drop mechanics, clean odds moments and satisfying motion.</span>
+                    <span class="play-button">
+                        <span class="button-glint" aria-hidden="true"></span>
+                        <span>Drop in</span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+
+                <a class="game-card game-card--live reveal casino-sound" href="https://1warjt.life/casino?p=sjr7" target="_blank" rel="noopener" data-sound="spin" data-tilt>
+                    <span class="card-glow"></span>
+                    <span class="game-top">
+                        <span class="game-icon game-icon--live" aria-hidden="true">
+                            <svg viewBox="0 0 64 64">
+                                <circle class="svg-wheel" cx="32" cy="32" r="20"></circle>
+                                <circle class="svg-hub" cx="32" cy="32" r="7"></circle>
+                                <path class="svg-pointer" d="M32 4 38 18H26z"></path>
+                                <path class="svg-sweep" d="M32 12v40M12 32h40M18 18l28 28M46 18 18 46"></path>
+                            </svg>
+                        </span>
+                        <span class="game-meta">
+                            <em>Live energy</em>
+                            <strong>Dealer Arena</strong>
+                        </span>
+                        <span class="odds-pill">Live</span>
+                    </span>
+                    <span class="game-visual live-visual" aria-hidden="true">
+                        <span class="roulette-wheel"></span>
+                        <span class="dealer-light dealer-light--one"></span>
+                        <span class="dealer-light dealer-light--two"></span>
+                    </span>
+                    <span class="card-stats">
+                        <span>Real-time</span>
+                        <span>Show feel</span>
+                    </span>
+                    <span class="game-copy">Roulette, blackjack and show-style rooms with broadcast feel.</span>
+                    <span class="play-button">
+                        <span class="button-glint" aria-hidden="true"></span>
+                        <span>Enter live</span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+
+                <a class="game-card game-card--slots reveal casino-sound" href="https://1wfaai.life/casino?p=vtol" target="_blank" rel="noopener" data-sound="slot" data-tilt>
+                    <span class="card-glow"></span>
+                    <span class="game-top">
+                        <span class="game-icon game-icon--slots" aria-hidden="true">
+                            <svg viewBox="0 0 64 64">
+                                <rect class="svg-machine" x="10" y="12" width="38" height="40"></rect>
+                                <path class="svg-lever" d="M49 22h6v18h-6M55 22v-8"></path>
+                                <circle class="svg-knob" cx="55" cy="12" r="5"></circle>
+                                <path class="svg-reel" d="M16 24h8M29 24h8M16 36h8M29 36h8"></path>
+                            </svg>
+                        </span>
+                        <span class="game-meta">
+                            <em>Slot evolution</em>
+                            <strong>Mega Reels</strong>
+                        </span>
+                        <span class="odds-pill">777</span>
+                    </span>
+                    <span class="game-visual slots-visual" aria-hidden="true">
+                        <span>7</span><span>BAR</span><span>x5</span>
+                        <span>PK</span><span>777</span><span>WILD</span>
+                    </span>
+                    <span class="card-stats">
+                        <span>Feature-led</span>
+                        <span>Big reels</span>
+                    </span>
+                    <span class="game-copy">Layered reels, bigger feature moments and bold visual rhythm.</span>
+                    <span class="play-button">
+                        <span class="button-glint" aria-hidden="true"></span>
+                        <span>Spin reels</span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+
+                <a class="game-card game-card--accent game-card--chicken reveal casino-sound" href="https://1warjt.life/v3/5768/tower-rush?p=ro1c" target="_blank" rel="noopener" data-sound="coin" data-tilt>
+                    <span class="card-glow"></span>
+                    <span class="game-top">
+                        <span class="game-icon game-icon--chicken" aria-hidden="true">
+                            <svg viewBox="0 0 64 64">
+                                <path class="svg-chicken-body" d="M14 38c0-12 10-22 25-22 11 0 20 7 20 18 0 12-10 20-25 20-12 0-20-6-20-16z"></path>
+                                <path class="svg-chicken-wing" d="M23 38c9 1 17 6 21 15-12 0-21-4-27-12z"></path>
+                                <path class="svg-chicken-comb" d="M34 15c0-9 8-11 10-2 4-9 12-5 8 3 8-3 12 5 4 9H35z"></path>
+                                <circle class="svg-chicken-eye" cx="47" cy="28" r="2"></circle>
+                                <path class="svg-chicken-beak" d="M56 31 64 35l-8 4z"></path>
+                                <path class="svg-chicken-leg" d="M29 53v8M44 52v8M27 61h-8M43 60h9"></path>
+                            </svg>
+                        </span>
+                        <span class="game-meta">
+                            <em>Road runner</em>
+                            <strong>Chicken Road</strong>
+                        </span>
+                        <span class="odds-pill">Coins</span>
+                    </span>
+                    <span class="game-visual chicken-card-visual" aria-hidden="true">
+                        <span class="mini-road"></span>
+                        <span class="mini-chicken"></span>
+                        <span class="mini-coin mini-coin--one"></span>
+                        <span class="mini-coin mini-coin--two"></span>
+                        <span class="mini-coin mini-coin--three"></span>
+                    </span>
+                    <span class="card-stats">
+                        <span>Runner</span>
+                        <span>Coin rush</span>
+                    </span>
+                    <span class="game-copy">A road-crossing casino runner mood: collect coins, dodge risk, chase the lobby.</span>
+                    <span class="play-button">
+                        <span class="button-glint" aria-hidden="true"></span>
+                        <span>Run road</span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+
+        <section class="experience-section" id="experience" aria-labelledby="experienceTitle">
+            <div class="experience-panel reveal">
+                <div class="section-heading">
+                    <p class="eyebrow">Interactive layer</p>
+                    <h2 id="experienceTitle">Motion, sound and 3D depth designed for conversion.</h2>
+                    <p>
+                        The page reacts like a premium digital product: animated background stage, pointer-based card tilt,
+                        casino-style clicks, reel tones and chip sounds after sound is enabled.
+                    </p>
                 </div>
+
+                <div class="feature-grid" aria-label="Experience features">
+                    <article>
+                        <span>01</span>
+                        <strong>3D lobby feel</strong>
+                        <p>Depth, perspective, floating chips and rotating casino geometry.</p>
+                    </article>
+                    <article>
+                        <span>02</span>
+                        <strong>Audio feedback</strong>
+                        <p>Generated sounds for chips, slots, plinko drops and win moments.</p>
+                    </article>
+                    <article>
+                        <span>03</span>
+                        <strong>Mobile-first CTA</strong>
+                        <p>Large cards and clear action buttons for fast traffic.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="guide-section" id="guide" aria-labelledby="guideTitle">
+            <div class="section-heading reveal">
+                <p class="eyebrow">Player route</p>
+                <h2 id="guideTitle">Three clean steps from landing to game.</h2>
+            </div>
+
+            <div class="steps-grid">
+                <article class="step-card reveal">
+                    <span class="step-number">01</span>
+                    <strong>Open the bonus route</strong>
+                    <p>Telegram and registration links stay visible without distracting from the game cards.</p>
+                </article>
+                <article class="step-card reveal">
+                    <span class="step-number">02</span>
+                    <strong>Pick a trending format</strong>
+                    <p>Crash, Mines, Plinko and Live formats are separated by clear visual language.</p>
+                </article>
+                <article class="step-card reveal">
+                    <span class="step-number">03</span>
+                    <strong>Play responsibly</strong>
+                    <p>18+ positioning and region notice make the product feel more trustworthy.</p>
+                </article>
             </div>
         </section>
     </main>
+
+    <footer class="site-footer">
+        <p>18+ only. Play responsibly. Availability and bonuses depend on your region.</p>
+        <div>
+            <a href="https://t.me/Anton_Ayvazovskiy" target="_blank" rel="noopener">Telegram</a>
+            <button class="share-button casino-sound" id="shareBtn" type="button" data-sound="chip">Share</button>
+        </div>
+    </footer>
+
     <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
 </div>
 
