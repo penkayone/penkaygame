@@ -6,9 +6,11 @@
     const cursorOrbit = document.getElementById("cursorOrbit");
     const canvas = document.getElementById("stageCanvas");
     const ctx = canvas.getContext("2d", {alpha: true});
+    const root = document.documentElement;
 
     let audioContext;
     let soundEnabled = false;
+    let pageTicking = false;
 
     const showToast = (message) => {
         if (!toast) return;
@@ -145,6 +147,31 @@
         element.addEventListener("click", () => playSound(element.dataset.sound || "chip"));
     });
 
+    const burstTargets = document.querySelectorAll(".primary-button, .ghost-button, .play-button, .header-cta, .game-card");
+    burstTargets.forEach((element) => {
+        element.addEventListener("pointerdown", (event) => {
+            if (prefersReducedMotion) return;
+
+            const rect = element.getBoundingClientRect();
+            const count = element.classList.contains("game-card") ? 10 : 7;
+
+            for (let i = 0; i < count; i += 1) {
+                const particle = document.createElement("span");
+                const angle = (Math.PI * 2 * i) / count + Math.random() * 0.34;
+                const distance = 34 + Math.random() * 44;
+
+                particle.className = "tap-burst";
+                particle.style.setProperty("--x", `${event.clientX - rect.left}px`);
+                particle.style.setProperty("--y", `${event.clientY - rect.top}px`);
+                particle.style.setProperty("--tx", `${Math.cos(angle) * distance}px`);
+                particle.style.setProperty("--ty", `${Math.sin(angle) * distance}px`);
+                particle.style.setProperty("--delay", `${i * 14}ms`);
+                element.appendChild(particle);
+                window.setTimeout(() => particle.remove(), 760);
+            }
+        });
+    });
+
     if (shareBtn) {
         shareBtn.addEventListener("click", async () => {
             const shareData = {title: document.title, url: window.location.href};
@@ -165,6 +192,33 @@
             }
         });
     }
+
+    const updatePageMotion = () => {
+        pageTicking = false;
+        const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+        root.style.setProperty("--page-progress", progress.toFixed(4));
+
+        if (progress < 0.22) {
+            document.body.dataset.scene = "intro";
+        } else if (progress < 0.5) {
+            document.body.dataset.scene = "road";
+        } else if (progress < 0.74) {
+            document.body.dataset.scene = "games";
+        } else {
+            document.body.dataset.scene = "experience";
+        }
+    };
+
+    const requestPageMotion = () => {
+        if (pageTicking) return;
+        pageTicking = true;
+        requestAnimationFrame(updatePageMotion);
+    };
+
+    window.addEventListener("scroll", requestPageMotion, {passive: true});
+    window.addEventListener("resize", requestPageMotion);
+    updatePageMotion();
 
     const revealItems = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window) {
@@ -239,6 +293,11 @@
 
     if (canHover) {
         document.addEventListener("pointermove", (event) => {
+            const pointerX = ((event.clientX / window.innerWidth) - 0.5) * 2;
+            const pointerY = ((event.clientY / window.innerHeight) - 0.5) * 2;
+            root.style.setProperty("--pointer-x", pointerX.toFixed(4));
+            root.style.setProperty("--pointer-y", pointerY.toFixed(4));
+
             if (!cursorOrbit) return;
             cursorOrbit.style.opacity = "1";
             cursorOrbit.style.transform = `translate(${event.clientX}px, ${event.clientY}px) translate(-50%, -50%)`;
@@ -267,6 +326,7 @@
         time: 0,
         chips: [],
         cards: [],
+        sparks: [],
     };
 
     const randomRange = (min, max) => min + Math.random() * (max - min);
@@ -298,6 +358,15 @@
             z: randomRange(0.25, 0.9),
             angle: randomRange(-0.8, 0.8),
             speed: randomRange(0.04, 0.14),
+        }));
+
+        stage.sparks = Array.from({length: 34}, () => ({
+            x: randomRange(-0.1, 1.1),
+            y: randomRange(-0.2, 1.1),
+            z: randomRange(0.4, 1),
+            length: randomRange(16, 58),
+            speed: randomRange(0.18, 0.58),
+            hue: Math.random() > 0.46 ? "#ffc24b" : (Math.random() > 0.5 ? "#48e6ff" : "#ff3e8f"),
         }));
     };
 
@@ -349,6 +418,29 @@
         ctx.restore();
     };
 
+    const drawSpark = (spark, time) => {
+        const drift = time * spark.speed;
+        const x = ((spark.x + Math.sin(time * 0.26 + spark.z * 7) * 0.025) % 1.2 - 0.1) * stage.width;
+        const y = ((spark.y + drift * 0.16) % 1.3 - 0.15) * stage.height;
+        const length = spark.length * spark.z;
+
+        ctx.save();
+        ctx.globalAlpha = 0.18 + spark.z * 0.5;
+        ctx.translate(x, y);
+        ctx.rotate(-0.48);
+        const gradient = ctx.createLinearGradient(0, -length, 0, length);
+        gradient.addColorStop(0, "rgba(255,255,255,0)");
+        gradient.addColorStop(0.42, spark.hue);
+        gradient.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = Math.max(1, 2.6 * spark.z);
+        ctx.beginPath();
+        ctx.moveTo(0, -length);
+        ctx.lineTo(0, length);
+        ctx.stroke();
+        ctx.restore();
+    };
+
     const drawStage = (timestamp) => {
         if (prefersReducedMotion) return;
         stage.time = timestamp * 0.001;
@@ -369,6 +461,7 @@
         }
         ctx.restore();
 
+        stage.sparks.forEach((spark) => drawSpark(spark, stage.time));
         stage.cards.forEach((card) => drawCard(card, stage.time));
         stage.chips.forEach((chip) => drawChip(chip, stage.time));
 

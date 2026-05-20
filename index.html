@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Penkay Games is a premium iGaming landing hub for crash, mines, plinko, live casino and instant-play games.">
-    <title>Penkay Games | Interactive iGaming Hub</title>
+    <meta name="description" content="Penkaygame is a premium iGaming landing hub for crash, mines, plinko, live casino and instant-play games.">
+    <title>Penkaygame | Interactive iGaming Hub</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -12,14 +12,20 @@
 <canvas class="stage-canvas" id="stageCanvas" aria-hidden="true"></canvas>
 
 <div class="cursor-orbit" id="cursorOrbit" aria-hidden="true"></div>
+<div class="cinema-overlay" aria-hidden="true">
+    <span class="cinema-overlay__beam cinema-overlay__beam--one"></span>
+    <span class="cinema-overlay__beam cinema-overlay__beam--two"></span>
+    <span class="cinema-overlay__progress"></span>
+</div>
 
 <div class="page" id="top">
     <header class="site-header" aria-label="Main navigation">
-        <a class="brand" href="#top" aria-label="Penkay Games home">
-            <span class="brand-mark">PK</span>
-            <span class="brand-text">
-                <strong>Penkay</strong>
-                <span>Games</span>
+        <a class="brand" href="#top" aria-label="Penkaygame home">
+            <span class="brand-mark">
+                <img class="brand-logo" src="assets/images/logo-penkay.svg" alt="">
+            </span>
+            <span class="brand-text" aria-hidden="true">
+                <strong>penkaygame</strong>
             </span>
         </a>
 
@@ -95,11 +101,61 @@
             </div>
 
             <div class="hero-orbital reveal" aria-hidden="true">
+                <img class="hero-scene-art" src="assets/images/generated/casino-npc-lobby.webp" alt="" decoding="async" fetchpriority="high">
+                <div class="hero-scene-grade"></div>
+                <div class="hero-camera-flare"></div>
                 <div class="orbital-ring orbital-ring--one"></div>
                 <div class="orbital-ring orbital-ring--two"></div>
+                <div class="hero-speed-lines">
+                    <span></span><span></span><span></span><span></span>
+                </div>
                 <div class="orbital-core">
                     <span class="core-value">x18.72</span>
                     <span class="core-label">cashout window</span>
+                </div>
+                <div class="hero-mascot">
+                    <span class="mascot-bubble">x50</span>
+                    <svg viewBox="0 0 220 190" role="img" aria-label="Penkaygame chicken mascot">
+                        <defs>
+                            <linearGradient id="mascotBody" x1="0" x2="1" y1="0" y2="1">
+                                <stop offset="0%" stop-color="#fff9d6"></stop>
+                                <stop offset="54%" stop-color="#ffd457"></stop>
+                                <stop offset="100%" stop-color="#ff8d35"></stop>
+                            </linearGradient>
+                            <linearGradient id="mascotRocket" x1="0" x2="1">
+                                <stop offset="0%" stop-color="#48e6ff"></stop>
+                                <stop offset="100%" stop-color="#c5ff34"></stop>
+                            </linearGradient>
+                        </defs>
+                        <ellipse class="mascot-shadow" cx="96" cy="164" rx="72" ry="16"></ellipse>
+                        <g class="mascot-body">
+                            <path class="mascot-tail" d="M38 84 9 61l36 5L24 32l42 25z"></path>
+                            <ellipse cx="95" cy="96" rx="66" ry="52" fill="url(#mascotBody)"></ellipse>
+                            <path class="mascot-wing" d="M58 103c28 4 49 21 62 48-34-2-59-17-73-40z"></path>
+                        </g>
+                        <g class="mascot-head">
+                            <circle cx="145" cy="62" r="34"></circle>
+                            <path class="mascot-comb" d="M123 37c-2-18 14-26 20-8 7-20 25-13 20 4 16-8 26 9 10 18z"></path>
+                            <circle class="mascot-eye" cx="155" cy="58" r="5"></circle>
+                            <circle class="mascot-eye-shine" cx="157" cy="56" r="1.8"></circle>
+                            <path class="mascot-beak" d="M176 66 212 78l-37 10z"></path>
+                        </g>
+                        <g class="mascot-legs">
+                            <path d="M78 136v26l-23 9"></path>
+                            <path d="M118 136v25l25 11"></path>
+                        </g>
+                        <g class="mascot-rocket">
+                            <path fill="url(#mascotRocket)" d="M122 112c24 0 43 13 48 36-24 10-52 9-79-4 4-20 14-31 31-32z"></path>
+                            <path d="M117 112c10-9 27-9 36 0"></path>
+                            <text x="124" y="145">PG</text>
+                        </g>
+                    </svg>
+                </div>
+                <div class="hero-coin-swarm">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="cinema-particles">
+                    <span></span><span></span><span></span><span></span><span></span><span></span>
                 </div>
                 <div class="floating-chip floating-chip--one">Crash</div>
                 <div class="floating-chip floating-chip--two">Mines</div>
@@ -198,7 +254,7 @@
                             <g class="coin-bag">
                                 <path d="M128 112c21 2 37 14 41 34-22 9-47 8-70-3 3-18 12-28 29-31z"></path>
                                 <path d="M120 112c8-8 24-8 32 0"></path>
-                                <text x="131" y="145">PK</text>
+                                <text x="131" y="145">PG</text>
                             </g>
                         </svg>
                     </div>
@@ -237,10 +293,13 @@
                         </span>
                         <span class="odds-pill">x250</span>
                     </span>
-                    <span class="game-visual crash-visual" aria-hidden="true">
-                        <span class="crash-grid"></span>
-                        <span class="flight-path"></span>
-                        <span class="rocket"></span>
+                    <span class="game-visual art-visual crash-visual" aria-hidden="true">
+                        <img class="game-art game-art--crash" src="assets/images/games/card-crash.webp" alt="" loading="lazy" decoding="async">
+                        <span class="art-vignette"></span>
+                        <span class="art-scan"></span>
+                        <span class="art-spark art-spark--one"></span>
+                        <span class="art-spark art-spark--two"></span>
+                        <span class="arcade-sticker arcade-sticker--crash">Boost</span>
                         <span class="multiplier">x7.84</span>
                         <span class="multiplier multiplier--late">x22.10</span>
                         <span class="cashout-meter"><i></i></span>
@@ -280,8 +339,13 @@
                         </span>
                         <span class="odds-pill">9x9</span>
                     </span>
-                    <span class="game-visual mines-visual" aria-hidden="true">
-                        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                    <span class="game-visual art-visual mines-visual" aria-hidden="true">
+                        <img class="game-art game-art--mines" src="assets/images/games/card-mines.webp" alt="" loading="lazy" decoding="async">
+                        <span class="art-vignette"></span>
+                        <span class="art-scan"></span>
+                        <span class="mine-hotspot mine-hotspot--safe"></span>
+                        <span class="mine-hotspot mine-hotspot--risk"></span>
+                        <span class="arcade-sticker arcade-sticker--mines">Pick</span>
                     </span>
                     <span class="card-stats">
                         <span>Pick tiles</span>
@@ -315,9 +379,13 @@
                         </span>
                         <span class="odds-pill">Drop</span>
                     </span>
-                    <span class="game-visual plinko-visual" aria-hidden="true">
-                        <span class="plinko-ball"></span>
-                        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                    <span class="game-visual art-visual plinko-visual" aria-hidden="true">
+                        <img class="game-art game-art--plinko" src="assets/images/games/card-plinko.webp" alt="" loading="lazy" decoding="async">
+                        <span class="art-vignette"></span>
+                        <span class="art-scan"></span>
+                        <span class="plinko-tracer"></span>
+                        <span class="art-spark art-spark--one"></span>
+                        <span class="arcade-sticker arcade-sticker--plinko">Drop</span>
                     </span>
                     <span class="card-stats">
                         <span>Gravity</span>
@@ -348,10 +416,13 @@
                         </span>
                         <span class="odds-pill">Live</span>
                     </span>
-                    <span class="game-visual live-visual" aria-hidden="true">
-                        <span class="roulette-wheel"></span>
-                        <span class="dealer-light dealer-light--one"></span>
-                        <span class="dealer-light dealer-light--two"></span>
+                    <span class="game-visual art-visual live-visual" aria-hidden="true">
+                        <img class="game-art game-art--live" src="assets/images/games/card-live.webp" alt="" loading="lazy" decoding="async">
+                        <span class="art-vignette"></span>
+                        <span class="art-scan"></span>
+                        <span class="live-spotlight live-spotlight--one"></span>
+                        <span class="live-spotlight live-spotlight--two"></span>
+                        <span class="arcade-sticker arcade-sticker--live">Show</span>
                     </span>
                     <span class="card-stats">
                         <span>Real-time</span>
@@ -382,9 +453,12 @@
                         </span>
                         <span class="odds-pill">777</span>
                     </span>
-                    <span class="game-visual slots-visual" aria-hidden="true">
-                        <span>7</span><span>BAR</span><span>x5</span>
-                        <span>PK</span><span>777</span><span>WILD</span>
+                    <span class="game-visual art-visual slots-visual" aria-hidden="true">
+                        <img class="game-art game-art--slots" src="assets/images/games/card-slots.webp" alt="" loading="lazy" decoding="async">
+                        <span class="art-vignette"></span>
+                        <span class="art-scan"></span>
+                        <span class="slot-reel-glow"></span>
+                        <span class="arcade-sticker arcade-sticker--slots">Wild</span>
                     </span>
                     <span class="card-stats">
                         <span>Feature-led</span>
@@ -417,12 +491,14 @@
                         </span>
                         <span class="odds-pill">Coins</span>
                     </span>
-                    <span class="game-visual chicken-card-visual" aria-hidden="true">
-                        <span class="mini-road"></span>
-                        <span class="mini-chicken"></span>
+                    <span class="game-visual art-visual chicken-card-visual" aria-hidden="true">
+                        <img class="game-art game-art--chicken" src="assets/images/games/card-chicken.webp" alt="" loading="lazy" decoding="async">
+                        <span class="art-vignette"></span>
+                        <span class="art-scan"></span>
                         <span class="mini-coin mini-coin--one"></span>
                         <span class="mini-coin mini-coin--two"></span>
                         <span class="mini-coin mini-coin--three"></span>
+                        <span class="arcade-sticker arcade-sticker--chicken">Run</span>
                     </span>
                     <span class="card-stats">
                         <span>Runner</span>
